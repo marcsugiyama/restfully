@@ -20,9 +20,9 @@ Phoenix server for demonstrating Wombat.
 
 Base URL: http://localhost:4000/
 
-|Action|Endpoint|Description|
-|------||--------|-----------|
-|GET|/counters|list counters|
-|POST|/counters|create new counter|
-|GET|/counters/:id|retrieve counter|
-|GET|/counters/:id/next|increment counter and get new value|
+Action | Endpoint | Description
+------ | -------- | -----------
+GET    | /counters | list counters
+POST   | /counters | create new counter
+GET    | /counters/:id | retrieve counter
+GET    | /counters/:id/next | increment counter and get new value
