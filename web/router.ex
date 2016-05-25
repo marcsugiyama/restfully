@@ -14,13 +14,9 @@ defmodule Restfully.Router do
   end
 
   scope "/", Restfully do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :api
 
-    get "/", PageController, :index
+    resources "/counters", CounterController, except: [:new, :edit]
+    get "/counters/:id/next", CounterController, :next
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", Restfully do
-  #   pipe_through :api
-  # end
 end
