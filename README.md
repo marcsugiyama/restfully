@@ -14,7 +14,8 @@ Phoenix server for demonstrating Wombat.
 2. compile - mix compile
 3. create database - mix ecto.create
 4. add Restfully tables - mix ecto.migrate
-5. start server - iex -S mix phoenix.server
+5. start server with node name - iex --name restfully@127.0.0.1 --cookie cookie -S mix phoenix.server
+
 
 # Endpoints
 
