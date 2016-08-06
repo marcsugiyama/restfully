@@ -55,14 +55,41 @@ defmodule Restfully.CounterController do
     send_resp(conn, :no_content, "")
   end
 
+  # returns counter after update, increment of counter is synchronous.
   def next(conn, %{"id" => id}) do
-    {:ok, counter} = Repo.transaction(
+    counter = Restfully.CounterSerial.transaction(
         fn() ->
-            Repo.get!(Counter, id)
-            |> increment_count
-            |> Repo.update!
+            {:ok, counter} = Repo.transaction(
+                fn() ->
+                    Repo.get!(Counter, id)
+                    |> increment_count
+                    |> Repo.update!
+                end
+            )
+            counter
         end
     )
+    render(conn, "show.json", counter: counter)
+  end
+
+  # returns current counter value, increment of counter is done
+  # asynchronously. Intended to show uncontrolled message queue growth
+  # in the absense of back pressure.
+  def incr(conn, %{"id" => id}) do
+    counter = Repo.get!(Counter, id)
+    Restfully.CounterSerial.async_transaction(
+        fn() ->
+            Repo.transaction(
+                fn() ->
+                    Repo.get!(Counter, id)
+                    |> increment_count
+                    |> Repo.update!
+                end
+            )
+        end
+    )
+    noop = fn() -> :ok end
+    for _ <- :lists.seq(1,100), do: Restfully.CounterSerial.async_transaction(noop)
     render(conn, "show.json", counter: counter)
   end
 

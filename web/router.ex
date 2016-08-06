@@ -18,5 +18,8 @@ defmodule Restfully.Router do
 
     resources "/counters", CounterController, except: [:new, :edit]
     get "/counters/:id/next", CounterController, :next
+    get "/counters/:id/incr", CounterController, :incr
+    get "/ets/bomb", EtsController, :bomb
+    get "/ets/defuse", EtsController, :defuse
   end
 end

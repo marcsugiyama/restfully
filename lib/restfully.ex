@@ -11,8 +11,9 @@ defmodule Restfully do
       supervisor(Restfully.Endpoint, []),
       # Start the Ecto repository
       supervisor(Restfully.Repo, []),
-      # Here you could define other workers and supervisors as children
-      # worker(Restfully.Worker, [arg1, arg2, arg3]),
+      # Counter serializer
+      worker(Restfully.CounterSerial, [], [restart: :permanent]),
+      worker(Restfully.Ets, [], [restart: :permanent]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
