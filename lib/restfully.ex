@@ -14,6 +14,7 @@ defmodule Restfully do
       # Counter serializer
       worker(Restfully.CounterSerial, [], [restart: :permanent]),
       worker(Restfully.Ets, [], [restart: :permanent]),
+      worker(Restfully.Process, [], [restart: :permanent]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

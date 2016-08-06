@@ -21,5 +21,7 @@ defmodule Restfully.Router do
     get "/counters/:id/incr", CounterController, :incr
     get "/ets/bomb", EtsController, :bomb
     get "/ets/defuse", EtsController, :defuse
+    get "/process/bomb", ProcessController, :bomb
+    get "/process/defuse", ProcessController, :defuse
   end
 end
