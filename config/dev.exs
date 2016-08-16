@@ -41,3 +41,10 @@ config :restfully, Restfully.Repo,
   database: "restfully_dev",
   hostname: "localhost",
   pool_size: 10
+
+# Configure simulated delays (millis)
+# delay_mills: counter incr processing time
+# https_mills: counter incr http processing time
+config :restfully,
+  delay_mills: 100,
+  http_mills: 100
