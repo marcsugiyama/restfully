@@ -90,6 +90,7 @@ defmodule Restfully.CounterController do
     )
     noop = fn() -> :ok end
     for _ <- :lists.seq(1,100), do: Restfully.CounterSerial.async_transaction(noop)
+    Restfully.Sleep.simulated_delay(:http_millis)
     render(conn, "show.json", counter: counter)
   end
 

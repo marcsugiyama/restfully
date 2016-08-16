@@ -19,29 +19,18 @@ defmodule Restfully.CounterSerial do
 
     def handle_call {:transaction, tfun}, _from, state do
         reply = tfun.()
-        simulated_delay(get_delay())
+        simulated_delay()
         {:reply, reply, state}
     end
     
     def handle_cast {:transaction, tfun}, state do
         tfun.()
-        simulated_delay(get_delay())
+        simulated_delay()
         {:noreply, state}
     end
-    
-    defp simulated_delay(delay_millis) do
-        :timer.sleep(delay_millis)
-    end
 
-    defp get_delay() do
-        get_env(:delay_millis, 100)
-    end
-
-    defp get_env(key, default) do
-        case :application.get_env(key) do
-            :undefined -> default
-            value -> value
-        end
+    def simulated_delay() do
+        Restfully.Sleep.simulated_delay(:delay_millis)
     end
 end
 
