@@ -25,5 +25,6 @@ defmodule Restfully.Router do
     get "/process/defuse", ProcessController, :defuse
     get "/atom/bomb", AtomController, :bomb
     put "/delay/:key/:value", DelayController, :set_delay
+    get "/mostly", MostlyController, :index
   end
 end

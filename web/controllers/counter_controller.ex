@@ -69,6 +69,7 @@ defmodule Restfully.CounterController do
             counter
         end
     )
+    Restfully.Sleep.simulated_delay(:http_millis)
     render(conn, "show.json", counter: counter)
   end
 

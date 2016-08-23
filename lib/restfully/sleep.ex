@@ -4,7 +4,7 @@ defmodule Restfully.Sleep do
     end
 
     def simulated_delay(key) do
-        :timer.sleep(get_delay(key))
+        sleep(get_delay(key))
     end
 
     defp get_delay(key) do
@@ -16,5 +16,12 @@ defmodule Restfully.Sleep do
             nil -> default
             value -> value
         end
+    end
+
+    defp sleep(0) do
+        :ok
+    end
+    defp sleep(millis) do
+        :timer.sleep(millis)
     end
 end
