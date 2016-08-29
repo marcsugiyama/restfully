@@ -48,3 +48,11 @@ config :restfully, Restfully.Repo,
 config :restfully,
   delay_mills: 100,
   http_mills: 100
+
+# Elixometer
+# config :exometer_core,
+#   report: [reporters: [{:exometer_report_tty, []}]]
+config :elixometer,
+#   reporter: :exometer_report_tty,
+    env: Mix.env,
+    metric_prefix: "restfully"

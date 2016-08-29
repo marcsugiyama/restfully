@@ -11,6 +11,7 @@ defmodule Restfully.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Restfully.StatsPlug
   end
 
   scope "/", Restfully do
